@@ -1,0 +1,2 @@
+# los CSV no se tocan (para que el archivo entregado conserve exactamente sus bytes)
+*.csv -text
