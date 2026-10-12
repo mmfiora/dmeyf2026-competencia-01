@@ -15,6 +15,7 @@ y, al final, lo compara con ese archivo.
 | Archivo | Para qué sirve |
 |---|---|
 | `competencia_FINAL.ipynb` | **Notebook que reproduce la predicción final** de principio a fin |
+| `competencia_FINAL_ejecutado.ipynb` | El mismo notebook **ya ejecutado** (salidas incluidas), con la verificación contra el archivo entregado |
 | `ensamble_K13000_ENTREGADO.csv` | El archivo exacto subido como entrega final (el notebook lo usa para verificar) |
 | `bo_resultados.csv` | Los 30 trials de la Bayesian Optimization (el trial 27 da los hiperparámetros del modelo final) |
 | `bayesiana_competencia_01_ejecutado.ipynb` | Notebook con el **código y la salida de la Bayesian Optimization** (Optuna/TPE, 30 trials, AUC) |
@@ -66,4 +67,13 @@ Predice **BAJA+2** del Paquete Premium en 202108 con LightGBM. Sigue la hoja de 
 
 ## Resultados de la verificación
 
-_(se completa al terminar la corrida completa del notebook)_
+El notebook se ejecutó **de principio a fin desde el CSV crudo** (`competencia_FINAL_ejecutado.ipynb` es esa ejecución, con todas sus salidas):
+
+- Inicio 11-oct-2026 22:42, fin 12-oct-2026 01:06 (2 h 24 min), Windows 10, CPU de 8 núcleos, Python 3.12.10, `lightgbm==4.7.0`.
+- **0 celdas con error.**
+- El archivo generado (`salida/entregas/ensamble_K13000.csv`) resultó **idéntico byte a byte** al archivo entregado
+  (`ensamble_K13000_ENTREGADO.csv`): mismos 13.000 clientes, mismo orden, **MD5 `038d426738376e6ac447e43e8dcbf9a6`** en ambos.
+  Las últimas celdas del notebook ejecutado muestran esa comparación.
+
+Nota sobre las semillas: las 20 semillas se entrenan en dos tandas de 10, cada una con su propio `Dataset` de LightGBM (el discretizado de las variables
+depende de la primera semilla que usa el `Dataset`). El notebook replica esa estructura para reproducir exactamente el archivo entregado.
